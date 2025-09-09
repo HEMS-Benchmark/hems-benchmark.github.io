@@ -2,11 +2,751 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HEMS-Benchmark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFlow AI - Energy Management Benchmarks</title>
+    <link rel="icon" type="image/svg+xml" href="hems.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .language-toggle {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .language-toggle:hover {
+            background: #1d4ed8;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            margin-top: -40px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1f2937;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Benchmarks Section */
+        .benchmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .benchmark-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .benchmark-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .benchmark-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benchmark-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .benchmark-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .benchmark-card p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .benchmark-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .benchmark-features li {
+            padding: 0.5rem 0;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benchmark-features li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .benchmark-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            border-radius: 6px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .about-content p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #f9fafb;
+        }
+
+        .footer-section p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav > div {
+                justify-content: space-between !important;
+            }
+
+            .benchmarks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Footer responsive */
+            footer {
+                padding: 2rem 0 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to HEMS-Benchmark</h1>
-    <p>This is the homepage of your GitHub Pages site.</p>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="hems.svg" alt="EcoFlow AI Logo">
+                <span>EcoFlow AI</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <ul class="nav-links">
+                    <li><a href="#home" data-en="Home" data-zh="首页">Home</a></li>
+                    <li><a href="#benchmarks" data-en="Benchmarks" data-zh="基准测试">Benchmarks</a></li>
+                    <li><a href="#about" data-en="About" data-zh="关于我们">About</a></li>
+                    <li><a href="#contact" data-en="Contact" data-zh="联系我们">Contact</a></li>
+                </ul>
+                <button class="language-toggle" onclick="toggleLanguage()">中文</button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="fade-in-up" data-en="Intelligent Energy Management Benchmarks" data-zh="能源管理智能基准测试">Intelligent Energy Management Benchmarks</h1>
+            <p class="fade-in-up" data-en="Advancing Large Language Models for Home Energy Management Systems (HEMS) and Battery Energy Storage Systems (BESS)" data-zh="推动家庭能源管理系统(HEMS)和电池储能系统(BESS)领域的大语言模型发展">Advancing Large Language Models for Home Energy Management Systems (HEMS) and Battery Energy Storage Systems (BESS)</p>
+            <div class="cta-buttons fade-in-up">
+                <a href="https://github.com/ecoflow-ai/hems-benchmark" class="btn btn-primary" target="_blank">
+                    <span>🏠</span> HEMS Benchmark
+                </a>
+                <a href="https://github.com/ecoflow-ai/bess-benchmark" class="btn btn-secondary" target="_blank">
+                    <span>🔋</span> BESS Benchmark
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title" data-en="Key Features" data-zh="核心特性">Key Features</h2>
+                <p class="section-subtitle" data-en="Comprehensive and professional evaluation framework for AI models in energy management" data-zh="为能源管理领域的AI模型提供全面、专业的评估框架">Comprehensive and professional evaluation framework for AI models in energy management</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 data-en="Professional Assessment" data-zh="专业评估">Professional Assessment</h3>
+                        <p data-en="Tailored evaluation metrics and methods for specific needs in energy management domain" data-zh="针对能源管理领域的特定需求，提供专业的模型性能评估指标和方法">Tailored evaluation metrics and methods for specific needs in energy management domain</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3 data-en="Scientific Rigor" data-zh="科学严谨">Scientific Rigor</h3>
+                        <p data-en="Based on real-world scenario data and industry standards to ensure scientific reliability" data-zh="基于真实场景数据和行业标准，确保评估结果的科学性和可靠性">Based on real-world scenario data and industry standards to ensure scientific reliability</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3 data-en="Open Source" data-zh="开源共享">Open Source</h3>
+                        <p data-en="Fully open-source benchmark framework promoting collaboration between academia and industry" data-zh="完全开源的基准测试框架，促进学术研究和产业应用的协同发展">Fully open-source benchmark framework promoting collaboration between academia and industry</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 data-en="Real-time Updates" data-zh="实时更新">Real-time Updates</h3>
+                        <p data-en="Continuously updated datasets and evaluation methods to keep pace with latest trends" data-zh="持续更新测试数据集和评估方法，跟上技术发展的最新趋势">Continuously updated datasets and evaluation methods to keep pace with latest trends</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3 data-en="Intelligent" data-zh="智能化">Intelligent</h3>
+                        <p data-en="Combined with agentic capability evaluation including multi-step reasoning, long-term planning and tool usage" data-zh="结合智能代理能力评估，包括多步推理、长期规划和工具使用">Combined with agentic capability evaluation including multi-step reasoning, long-term planning and tool usage</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 data-en="Multi-dimensional" data-zh="多维度">Multi-dimensional</h3>
+                        <p data-en="Comprehensive evaluation across expressiveness, factuality, logicality, stability, fairness, and safety" data-zh="从表达性、事实性、逻辑性、稳定性、公平性、安全性等多个维度进行综合评估">Comprehensive evaluation across expressiveness, factuality, logicality, stability, fairness, and safety</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benchmarks">
+            <div class="container">
+                <h2 class="section-title" data-en="Benchmark Projects" data-zh="基准测试项目">Benchmark Projects</h2>
+                <p class="section-subtitle" data-en="Two professional energy management AI evaluation benchmarks covering different application scenarios" data-zh="两个专业的能源管理AI评估基准，覆盖不同应用场景">Two professional energy management AI evaluation benchmarks covering different application scenarios</p>
+                
+                <div class="benchmarks-grid">
+                    <div class="benchmark-card">
+                        <div class="benchmark-header">
+                            <div class="benchmark-icon">🏠</div>
+                            <h3>HEMS Benchmark</h3>
+                        </div>
+                        <p data-en="A comprehensive evaluation benchmark focused on Home Energy Management Systems, covering smart homes, energy optimization, user interaction and more." data-zh="专注于家庭能源管理系统的综合评估基准，涵盖智能家居、能源优化、用户交互等多个方面。">A comprehensive evaluation benchmark focused on Home Energy Management Systems, covering smart homes, energy optimization, user interaction and more.</p>
+                        <ul class="benchmark-features">
+                            <li data-en="Smart energy scheduling algorithm evaluation" data-zh="智能能源调度算法评估">Smart energy scheduling algorithm evaluation</li>
+                            <li data-en="User behavior prediction capability testing" data-zh="用户行为预测能力测试">User behavior prediction capability testing</li>
+                            <li data-en="Device control strategy optimization" data-zh="设备控制策略优化">Device control strategy optimization</li>
+                            <li data-en="Cost-benefit analysis capabilities" data-zh="成本效益分析能力">Cost-benefit analysis capabilities</li>
+                            <li data-en="Security and privacy protection" data-zh="安全性和隐私保护">Security and privacy protection</li>
+                        </ul>
+                        <div class="benchmark-links">
+                            <a href="https://github.com/ecoflow-ai/hems-benchmark" class="btn btn-primary btn-small" target="_blank">
+                                <span data-en="GitHub Repository" data-zh="GitHub 仓库">GitHub Repository</span>
+                            </a>
+                            <a href="https://github.com/ecoflow-ai/hems-benchmark#readme" class="btn btn-secondary btn-small" target="_blank">
+                                <span data-en="Documentation" data-zh="文档说明">Documentation</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="benchmark-card">
+                        <div class="benchmark-header">
+                            <div class="benchmark-icon">🔋</div>
+                            <h3>BESS Benchmark</h3>
+                        </div>
+                        <p data-en="A specialized evaluation benchmark for Battery Energy Storage Systems, testing models' expertise in energy storage technology, energy management, safety regulations and more." data-zh="专门针对电池储能系统的评估基准，测试模型在储能技术、能源管理、安全监管等方面的专业能力。">A specialized evaluation benchmark for Battery Energy Storage Systems, testing models' expertise in energy storage technology, energy management, safety regulations and more.</p>
+                        <ul class="benchmark-features">
+                            <li data-en="Energy storage technology and equipment knowledge" data-zh="储能技术与设备知识">Energy storage technology and equipment knowledge</li>
+                            <li data-en="Energy forecasting and scheduling management" data-zh="能源预测与调度管理">Energy forecasting and scheduling management</li>
+                            <li data-en="Safety regulations and emergency response" data-zh="安全规范与应急响应">Safety regulations and emergency response</li>
+                            <li data-en="User experience and service support" data-zh="用户体验与服务支持">User experience and service support</li>
+                            <li data-en="Multi-step reasoning and long-term planning" data-zh="多步推理与长期规划">Multi-step reasoning and long-term planning</li>
+                        </ul>
+                        <div class="benchmark-links">
+                            <a href="https://github.com/ecoflow-ai/bess-benchmark" class="btn btn-primary btn-small" target="_blank">
+                                <span data-en="GitHub Repository" data-zh="GitHub 仓库">GitHub Repository</span>
+                            </a>
+                            <a href="https://github.com/ecoflow-ai/bess-benchmark#readme" class="btn btn-secondary btn-small" target="_blank">
+                                <span data-en="Documentation" data-zh="文档说明">Documentation</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title" data-en="About Us" data-zh="关于我们">About Us</h2>
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h3 data-en="Driving the Future of Energy AI" data-zh="推动能源AI的未来发展">Driving the Future of Energy AI</h3>
+                        <p data-en="We are committed to providing professional evaluation tools and standards for artificial intelligence development in the energy management field. Through our open-source benchmark framework, we aim to promote collaboration between academia and industry, accelerating innovation and application of intelligent energy technologies." data-zh="我们致力于为能源管理领域的人工智能发展提供专业的评估工具和标准。通过开源的基准测试框架，我们希望促进学术界和产业界的合作，加速智能能源技术的创新和应用。">We are committed to providing professional evaluation tools and standards for artificial intelligence development in the energy management field. Through our open-source benchmark framework, we aim to promote collaboration between academia and industry, accelerating innovation and application of intelligent energy technologies.</p>
+                        <p data-en="Our project is inspired by excellent power industry benchmarks like ElecBench, while incorporating the latest trends in large language models and agentic AI technologies, providing more professional and comprehensive evaluation solutions for the energy management domain." data-zh="我们的项目灵感来源于ElecBench等优秀的电力行业基准测试，同时结合了最新的大语言模型和智能代理技术发展趋势，为能源管理领域提供更加专业和全面的评估方案。">Our project is inspired by excellent power industry benchmarks like ElecBench, while incorporating the latest trends in large language models and agentic AI technologies, providing more professional and comprehensive evaluation solutions for the energy management domain.</p>
+                        <p data-en="Join us in building a smarter, more efficient, and more sustainable energy future!" data-zh="加入我们，一起构建更智能、更高效、更可持续的能源未来！">Join us in building a smarter, more efficient, and more sustainable energy future!</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="hems.svg" alt="Energy Management Illustration" style="max-width: 300px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-en="Projects" data-zh="项目">Projects</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/ecoflow-ai/hems-benchmark" target="_blank">
+                            <span>🏠</span> HEMS Benchmark
+                        </a></li>
+                        <li><a href="https://github.com/ecoflow-ai/bess-benchmark" target="_blank">
+                            <span>🔋</span> BESS Benchmark
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Resources" data-zh="资源">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://power-agent.github.io/" target="_blank">PowerAgent</a></li>
+                        <li><a href="https://github.com/ecoflow-ai" target="_blank">EcoFlow AI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Contact" data-zh="联系我们">Contact</h4>                   
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/ecoflow-ai/hems-benchmark/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-en="&copy; 2025 EcoFlow AI. All rights reserved. | Open source project under MIT License" data-zh="&copy; 2025 EcoFlow AI. All rights reserved. | 开源项目，遵循MIT许可证">&copy; 2025 EcoFlow AI. All rights reserved. | Open source project under MIT License</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language toggle functionality
+        let currentLang = 'en';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateLanguage();
+        }
+        
+        function updateLanguage() {
+            const langButton = document.querySelector('.language-toggle');
+            langButton.textContent = currentLang === 'en' ? '中文' : 'English';
+            
+            // Update document language attribute
+            document.documentElement.lang = currentLang === 'en' ? 'en' : 'zh-CN';
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en][data-zh]').forEach(element => {
+                const text = currentLang === 'en' ? element.getAttribute('data-en') : element.getAttribute('data-zh');
+                
+                if (element.tagName === 'SPAN') {
+                    element.textContent = text;
+                } else {
+                    // For other elements, update innerHTML but preserve HTML structure
+                    if (element.children.length === 0) {
+                        element.textContent = text;
+                    } else {
+                        // If element has children, only update text nodes
+                        const walker = document.createTreeWalker(
+                            element,
+                            NodeFilter.SHOW_TEXT,
+                            null,
+                            false
+                        );
+                        const textNode = walker.nextNode();
+                        if (textNode && textNode.textContent.trim()) {
+                            textNode.textContent = text;
+                        }
+                    }
+                }
+            });
+            
+            // Save language preference
+            localStorage.setItem('preferred-language', currentLang);
+        }
+        
+        // Load saved language preference on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-language');
+            if (savedLang && savedLang !== currentLang) {
+                currentLang = savedLang;
+                updateLanguage();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.feature-card, .benchmark-card, .about-content').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
