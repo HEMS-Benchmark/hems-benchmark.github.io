@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoFlow AI - Energy Management Benchmarks</title>
     <link rel="icon" type="image/svg+xml" href="hems.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -15,9 +17,6 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
         }
 
         .container {
@@ -26,139 +25,11 @@
             padding: 0 20px;
         }
 
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        .logo img {
-            width: 40px;
-            height: 40px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #374151;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-        }
-
-        .language-toggle {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .language-toggle:hover {
-            background: #1d4ed8;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #2563eb;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
 
         /* Main Content */
         main {
             background: white;
-            margin-top: -40px;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-            z-index: 10;
         }
 
         section {
@@ -167,67 +38,71 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1f2937;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            letter-spacing: -0.025em;
         }
 
         .section-subtitle {
             text-align: center;
             font-size: 1.125rem;
-            color: #6b7280;
-            margin-bottom: 4rem;
-            max-width: 600px;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.7;
         }
 
         /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .feature-card {
-            background: #f8fafc;
+            background: #ffffff;
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 12px;
             text-align: center;
             transition: all 0.3s;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            color: white;
+            font-size: 1.25rem;
+            color: #2563eb;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
         }
 
         .feature-card p {
             color: #6b7280;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* Benchmarks Section */
@@ -240,16 +115,17 @@
 
         .benchmark-card {
             background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
         }
 
         .benchmark-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
         }
 
         .benchmark-header {
@@ -260,22 +136,21 @@
         }
 
         .benchmark-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-size: 1.25rem;
-            font-weight: bold;
+            color: white;
         }
 
         .benchmark-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
         .benchmark-card p {
@@ -298,8 +173,8 @@
         }
 
         .benchmark-features li::before {
-            content: "✓";
-            color: #10b981;
+            content: "•";
+            color: #6b7280;
             font-weight: bold;
         }
 
@@ -318,17 +193,17 @@
         /* About Section */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 4rem;
             align-items: center;
             margin-top: 3rem;
         }
 
         .about-content h3 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #1f2937;
+            color: #1a1a1a;
         }
 
         .about-content p {
@@ -349,9 +224,10 @@
 
         /* Footer */
         footer {
-            background: #1f2937;
-            color: white;
+            background: #f9fafb;
+            color: #374151;
             padding: 3rem 0 2rem;
+            border-top: 1px solid #e5e7eb;
         }
 
         .footer-content {
@@ -363,28 +239,28 @@
         }
 
         .footer-section h4 {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #f9fafb;
+            color: #1a1a1a;
         }
 
         .footer-section p {
-            color: #d1d5db;
+            color: #6b7280;
             line-height: 1.6;
             margin-bottom: 0.75rem;
             font-size: 0.9rem;
         }
 
         .footer-section a {
-            color: #d1d5db;
+            color: #6b7280;
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: 500;
         }
 
         .footer-section a:hover {
-            color: #667eea;
+            color: #1a1a1a;
         }
 
         .footer-links {
@@ -404,25 +280,23 @@
         }
 
         .footer-bottom {
-            border-top: 1px solid #374151;
+            border-top: 1px solid #e5e7eb;
             padding-top: 2rem;
             text-align: center;
             color: #9ca3af;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
         }
 
-        /* Responsive Design */
+        /* Custom responsive styles for sections */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            nav > div {
-                justify-content: space-between !important;
+            .features-grid {
+                grid-template-columns: 1fr;
             }
 
             .benchmarks-grid {
@@ -432,22 +306,6 @@
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            /* Footer responsive */
-            footer {
-                padding: 2rem 0 1.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                text-align: center;
             }
         }
 
@@ -468,43 +326,35 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <img src="hems.svg" alt="EcoFlow AI Logo">
-                <span>EcoFlow AI</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 2rem;">
-                <ul class="nav-links">
-                    <li><a href="#home" data-en="Home" data-zh="首页">Home</a></li>
-                    <li><a href="#benchmarks" data-en="Benchmarks" data-zh="基准测试">Benchmarks</a></li>
-                    <li><a href="#about" data-en="About" data-zh="关于我们">About</a></li>
-                    <li><a href="#contact" data-en="Contact" data-zh="联系我们">Contact</a></li>
-                </ul>
-                <button class="language-toggle" onclick="toggleLanguage()">中文</button>
-            </div>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="container">
-            <h1 class="fade-in-up" data-en="Energy Management Benchmarks" data-zh="能源管理基准测试">Energy Management Benchmarks</h1>
-            <p class="fade-in-up" data-en="Advancing foundation models for Home Energy Management Systems and Battery Energy Storage scenarios" data-zh="推动家庭能源管理系统和电池储能场景的基础模型发展">Advancing foundation models for Home Energy Management Systems and Battery Energy Storage scenarios</p>
-            <div class="cta-buttons fade-in-up">
-                <a href="https://github.com/ecoflow-ai/hems-benchmark" class="btn btn-primary" target="_blank">
-                    <span>🏠</span> HEMS Benchmark
-                </a>
-                <a href="https://github.com/ecoflow-ai/bess-benchmark" class="btn btn-secondary" target="_blank">
-                    <span>🔋</span> BESS Benchmark
-                </a>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <header class="bg-slate-900 text-white text-center py-16 md:py-20 relative shadow-xl">
+        <div class="absolute top-5 right-5 z-10">
+            <a href="https://github.com/ecoflow-ai" class="github-banner bg-slate-800 text-white py-2 px-5 rounded-lg flex items-center gap-3 shadow-lg hover:bg-slate-700 transition-all duration-300 transform hover:-translate-y-0.5">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" class="fill-current">
+                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                </svg>
+                <span class="font-semibold">View on GitHub</span>
+            </a>
+        </div>
+        <div class="absolute top-5 left-5 z-10 hidden">
+            <button onclick="toggleLanguage()" class="language-toggle bg-slate-800 text-white py-2 px-5 rounded-lg shadow-lg hover:bg-slate-700 transition-all duration-300 font-semibold">中文</button>
+        </div>
+        <div class="container mx-auto px-4 relative z-20">
+            <div class="title-group flex flex-col items-center gap-8 md:gap-10">
+                <h1 class="flex items-center gap-6">
+                    <img src="hems-blue.svg" alt="HEMS Benchmark Logo" class="h-32 w-32 md:h-40 md:w-40 lg:h-48 lg:w-48 rounded-2xl">
+                    <div class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-normal tracking-tight text-left">
+                        <div data-en="HEMS" data-zh="HEMS">HEMS</div>
+                        <div data-en="Benchmark" data-zh="基准测试">Benchmark</div>
+                    </div>
+                </h1>
+                <p class="subtitle text-xl md:text-2xl opacity-90 font-light tracking-wide text-slate-300 bg-white/5 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg" data-en="Open-Source Benchmarks for Home Energy Management Systems" data-zh="家庭能源管理系统的开源基准测试">Open-Source Benchmarks for Home Energy Management Systems</p>
             </div>
         </div>
-    </section>
+    </header>
 
-    <main>
-        <section id="features">
-            <div class="container">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <section id="features" class="mb-16 md:mb-20 bg-white/70 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-slate-200/80">
                 <h2 class="section-title" data-en="Key Features" data-zh="核心特性">Key Features</h2>
                 <p class="section-subtitle" data-en="Comprehensive and professional evaluation framework for foundation models in energy management scenarios" data-zh="为能源管理场景中的基础模型提供全面、专业的评估框架">Comprehensive and professional evaluation framework for foundation models in energy management scenarios</p>
                 
@@ -540,11 +390,9 @@
                         <p data-en="Comprehensive evaluation across expressiveness, factuality, logicality, stability, fairness, and safety" data-zh="从表达性、事实性、逻辑性、稳定性、公平性、安全性等多个维度进行综合评估">Comprehensive evaluation across expressiveness, factuality, logicality, stability, fairness, and safety</p>
                     </div>
                 </div>
-            </div>
         </section>
 
-        <section id="benchmarks">
-            <div class="container">
+        <section id="benchmarks" class="mb-16 md:mb-20 bg-white/70 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-slate-200/80">
                 <h2 class="section-title" data-en="Benchmark Projects" data-zh="基准测试项目">Benchmark Projects</h2>
                 <p class="section-subtitle" data-en="HEMS-benchmark evaluates foundation models in home energy management scenarios, while BESS-benchmark focuses on battery energy storage and home energy management scenarios" data-zh="HEMS-benchmark评估基础模型在家庭能源管理场景中的能力，BESS-benchmark专注于电池储能和家庭能源管理场景">HEMS-benchmark evaluates foundation models in home energy management scenarios, while BESS-benchmark focuses on battery energy storage and home energy management scenarios</p>
                 
@@ -595,11 +443,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
-        <section id="about">
-            <div class="container">
+        <section id="about" class="mb-16 md:mb-20 bg-white/70 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-slate-200/80">
                 <h2 class="section-title" data-en="About Us" data-zh="关于我们">About Us</h2>
                 <div class="about-grid">
                     <div class="about-content">
@@ -609,44 +455,15 @@
                         <p data-en="Join us in building a smarter, more efficient, and more sustainable energy future!" data-zh="加入我们，一起构建更智能、更高效、更可持续的能源未来！">Join us in building a smarter, more efficient, and more sustainable energy future!</p>
                     </div>
                     <div class="about-image">
-                        <img src="hems.svg" alt="Energy Management Illustration" style="max-width: 300px;">
+                        <img src="hems.svg" alt="Energy Management Illustration" class="w-40 h-40 mx-auto opacity-80">
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4 data-en="Projects" data-zh="项目">Projects</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://github.com/ecoflow-ai/hems-benchmark" target="_blank">
-                            <span>🏠</span> HEMS Benchmark
-                        </a></li>
-                        <li><a href="https://github.com/ecoflow-ai/bess-benchmark" target="_blank">
-                            <span>🔋</span> BESS Benchmark
-                        </a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 data-en="Resources" data-zh="资源">Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://power-agent.github.io/" target="_blank">PowerAgent</a></li>
-                        <li><a href="https://github.com/ecoflow-ai" target="_blank">EcoFlow AI</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 data-en="Contact" data-zh="联系我们">Contact</h4>                   
-                    <ul class="footer-links">
-                        <li><a href="https://github.com/ecoflow-ai/hems-benchmark/issues" target="_blank">GitHub Issues</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-en="&copy; 2025 EcoFlow AI. All rights reserved. | Open source project under MIT License" data-zh="&copy; 2025 EcoFlow AI. All rights reserved. | 开源项目，遵循MIT许可证">&copy; 2025 EcoFlow AI. All rights reserved. | Open source project under MIT License</p>
-            </div>
+    <footer id="contact" class="bg-slate-900 text-slate-400 text-center py-8 mt-16">
+        <div class="container mx-auto">
+            <p data-en="&copy; 2025 EcoFlow AI. All rights reserved." data-zh="&copy; 2025 EcoFlow AI. All rights reserved.">&copy; 2025 EcoFlow AI. All rights reserved.</p>
         </div>
     </footer>
 
@@ -723,9 +540,9 @@
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.background = 'rgba(15, 23, 42, 0.98)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.background = 'rgb(15, 23, 42)';
             }
         });
 
